@@ -1,0 +1,36 @@
+application: comicrecorder
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /py/record_comics
+  script: py.record_comics.app
+  login: required
+
+- url: /py/retrieve_comics
+  script: py.retrieve_comics.app
+  login: required
+
+- url: /py/delete_comic.*
+  script: py.delete_comic.app
+  login: required
+
+- url: (.*)/
+  static_files: dist\1/index.html
+  upload: app
+  login: required
+
+- url: (.*)
+  static_files: dist\1
+  upload: app
+  login: required
+
+- url: /
+  script: py.main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
