@@ -16,3 +16,28 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 	left:200px;
 	top:100px;
 };
+
+#newTableEntry {
+    position: relative;
+    top: 80px;
+};
+
+.navbar-fixed-top{
+	height: 80px;
+}
+
+.right {
+     height: 80px;
+     position: absolute;
+    // float: right;
+}
+
+#addInput {
+    height: 80px;
+    position: relative;
+};
+
+.table {
+    top: 250px;
+};
+
