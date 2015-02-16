@@ -11,6 +11,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="styles/main.css">
+        <img src="./images/download.jpeg" id="bg" alt="">
         
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
@@ -22,20 +23,19 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div id="addInput">
-            </div>
-        </nav>
-
-        <div id="newTableEntry"></div>
+        <div class="container">
+            <div id="app"></div>
+        </div>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         
-        <script src="scripts/addComic.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/AddComic.js"></script>
+        <script src="scripts/ComicInventory.js"></script>
+        <script src="scripts/ComicStore.js"></script>
 
         <!-- <script src="scripts/Table.js"></script> -->        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

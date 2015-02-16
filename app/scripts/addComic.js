@@ -3,109 +3,77 @@
 'use strict';
 
 var React = require('react');
+
 var Button = require('react-bootstrap/Button');
+var ButtonToolbar = require('react-bootstrap/ButtonToolbar');
 var Input = require('react-bootstrap/Input');
+var Panel = require('react-bootstrap/Panel');
 var Table = require('react-bootstrap/Table');
 
-// var ComicStore = require('./stores/ComicStore');
+var ComicStore = require('./ComicStore');
 
-var ComicInput = React.createClass({
+var AddComic = React.createClass({
+
 	getInitialState: function() {
-		return {comic: []}
+		return {artist: '',
+				writer: '',
+				publisher: ''
+			};
 	},
+
+	onSync: function() {
+		var newComic = {
+			artist: this.state.artist,
+			writer: this.state.writer,
+			publisher: this.state.publisher
+		};
+		console.log(newComic);
+		ComicStore.addComic(newComic);
+	},
+
+	onArtistChanged: function(e) {
+		this.setState({artist: e.target.value});
+	},
+	onWriterChanged: function(e) {
+		this.setState({writer: e.target.value});
+	},
+	onPublisherChanged: function(e) {
+		this.setState({publisher: e.target.value});
+	},
+
 	render: function() {
 		return (
-			<div className="right">
-				<form className = "navbar-form navbar-left">
-					<Input type="text" placeholder="Writer" value={this.state.comic.writer} />
-					<Input type="text" placeholder="Artist" value={this.state.comic.artist} />
-					<Input type="text" placeholder="Publisher" value={this.state.comic.publisher} />
-					<Input type="text" placeholder="Book #" value={this.state.comic.book} />
-
-					<Input type="submit" value={this.state.comic} add={this.add} />
+			<Panel header='Add New Comic' className="panel-primary">
+				<ButtonToolbar>
+					<Button bsStyle="primary" onClick={this.onSync}>Sync</Button>
+					<Button bsStyle="primary">Edit</Button>
+				</ButtonToolbar>
+				<form>
+					<Table>
+						<tbody>
+							<tr>
+								<th>Artist</th>
+								<td><Input type="text" ref='artist' id='artist' onChange={this.onArtistChanged}/></td>
+							</tr>
+							<tr>
+								<th>
+									Writer
+								</th>
+								<td><Input type="text" ref='writer' id='writer' onChange={this.onWriterChanged}/></td>
+							</tr>
+							<tr>
+								<th>
+									Publisher
+								</th>
+								<td><Input type="text" ref='publisher' id='publisher' onChange={this.onPublisherChanged}/></td>
+							</tr>
+						</tbody>
+					</Table>
 				</form>
-			</div>
-		)
-	},
-	add: function(e) {
-		var val = e.target.value;
-		console.log(val);
-	}
-});
-
-var mountNode = document.getElementById('addInput');
-React.renderComponent(<ComicInput />, mountNode);
-
-var ComicBookRow = React.createClass({
-	render: function() {
-		return (
-			<tr>
-				<td>
-					{this.props.comic.writer}
-				</td>
-				<td>
-					{this.props.comic.artist}
-				</td>
-				<td>
-					{this.props.comic.publisher}
-				</td>
-				<td>
-					{this.props.comic.book}
-				</td>
-			</tr>
+			</Panel>
 		)
 	}
 });
 
-var NewTableEntry = React.createClass({
-	render: function() {
-		var rows = this.props.comics.map(function(comic) {
-			return (
-				<div>
-					<ComicBookRow key={comic} comic={comic} />
-				</div>
-			)
-		});
-		return (
-			<div className="table">
-				<Table>
-					<thead>
-						<tr>
-							<th>Writer</th>
-							<th>Artist</th>
-							<th>Publisher</th>
-							<th>Book #</th>
-						</tr>
-					</thead>
-					<tbody>
-						{rows}
-					</tbody>
-				</Table>
-			</div>
-		)
-	}
-});
-
-
-var comics = [
-				{
-					writer : "Jamal",
-					artist : "Martin",
-					publisher : "Marvel",
-					book : "1"
-				},
-				{
-					writer : "Zoom",
-					artist : "Martin",
-					publisher : "Marvel",
-					book : "2"
-				},
-				{
-					writer : "Boom",
-					artist : "Crud",
-					publisher : "DC",
-					book : "3"
-				}
-			];
-
-React.renderComponent(<NewTableEntry comics={comics}/>, document.getElementById('newTableEntry'));
+// React.renderComponent(<ComicApp comicData={comicData} />, document.getElementById('app'));
+module.exports = AddComic;

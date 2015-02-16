@@ -2,42 +2,22 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
-#sidebar-wrapper {
-    background-color: #222;
-    min-width: 150px;
-    border: solid 1px #222;
-    top: 50px;
-    position: absolute;
-    height: 100%;
-};
+#bg {
+	z-index: -1;
+	position: fixed; 
+	top: 0; 
+	left: 0; 
 
-#table {
-	position:absolute;
-	left:200px;
-	top:100px;
-};
-
-#newTableEntry {
-    position: relative;
-    top: 80px;
-};
-
-.navbar-fixed-top{
-	height: 80px;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
 }
 
-.right {
-     height: 80px;
-     position: absolute;
-    // float: right;
+.container {
+	max-width: 730px;
 }
 
-#addInput {
-    height: 80px;
-    position: relative;
-};
-
-.table {
-    top: 250px;
-};
-
+.navbar-default {
+	background-color: #428bca;
+	border-color: #428bca;
+}

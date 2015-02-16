@@ -12,7 +12,7 @@ var $ = require('gulp-load-plugins')();
 
 // Styles
 gulp.task('styles', function () {
-    return gulp.src('app/styles/main.scss')
+    return gulp.src('app/styles/*.*')
         .pipe($.rubySass({
             style: 'expanded',
             precision: 10,
@@ -47,7 +47,7 @@ gulp.task('html', function () {
 
 // Images
 gulp.task('images', function () {
-    return gulp.src('app/images/**/*')
+    return gulp.src('app/images/**.*')
         .pipe($.cache($.imagemin({
             optimizationLevel: 3,
             progressive: true,
@@ -77,7 +77,7 @@ gulp.task('clean', function (cb) {
 
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
+gulp.task('bundle', ['styles', 'scripts', 'bower', 'images'], function(){
     return gulp.src('./app/*.html')
                .pipe($.useref.assets())
                .pipe($.useref.restore())
