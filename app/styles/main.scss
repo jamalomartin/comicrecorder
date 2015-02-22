@@ -2,6 +2,14 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+.header {
+    font-style: oblique;
+    background-color: #428bca;
+    border: solid 1px;
+	border-radius: 5px;
+	width: 180px;
+}
+
 #bg {
 	z-index: -1;
 	position: fixed; 
@@ -13,6 +21,11 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 	min-height: 100%;
 }
 
+.comic-table {
+    border: solid 1px;
+	border-radius: 5px;
+}
+
 .container {
 	max-width: 730px;
 }
@@ -20,4 +33,38 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 .navbar-default {
 	background-color: #428bca;
 	border-color: #428bca;
+    border: solid 1px;
+	border-radius: 5px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #0D0D0D;
+}
+
+.panel-primary {
+	border: solid 1px;
+}
+
+.row {
+	background-color: #f9f9f9;
+}
+
+.ctable {
+	margin: 0 0 0 0;
+	// border-bottom-left-radius:10px;
+	// border-top-left-radius:10px;
+ //    border-bottom-right-radius:10px;
+ //    border-top-right-radius:10px;
+}
+
+.text-font {
+	font: 13px sans-serif;
+}
+
+.text-header {
+	background-color: #428bca !important;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+   background-color: white;
 }

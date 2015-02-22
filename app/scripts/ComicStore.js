@@ -5,9 +5,8 @@ var ComicStore = {
 		'loadComic': []
 	},
 
-	addConsumer: function(type, callBack) {
+	addConsumer: function(type, callback) {
 		var relevantCallbacks = this.callbacks[type];
-		console.log(relevantCallbacks);
 		relevantCallbacks.push(callback);
 	},
 
@@ -24,10 +23,30 @@ var ComicStore = {
 
 	addComic: function(comic) {
 		console.log("ComicStore", comic);
+		$.ajax({
+			url: '/py/record_comics',
+			type: 'POST',
+			dataType: 'json',
+			data: JSON.stringify(comic),
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			success: function (data) {
+				this.notifyConsumers('addComic', data);
+			}.bind(this)
+		});
 	},
 
 	loadComic: function() {
-
+		$.ajax({
+			url: '/py/retrieve_comics',
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				var comics = data
+				this.comics = comics;
+				console.log(this.comics);
+				this.notifyConsumers('loadComic', data);
+			}.bind(this)
+		});
 	},
 
 	getComics: function() {

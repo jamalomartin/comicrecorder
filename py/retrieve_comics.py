@@ -19,7 +19,7 @@ class GetComicList(webapp2.RequestHandler):
 			 'key': c.key.urlsafe()}
 			 for c in comic_entities
 		]
-		self.response.write(json.dumps(comics))
+		self.response.write(json.dumps(comics));
 
 app = webapp2.WSGIApplication([
     ('/py/retrieve_comics', GetComicList)
