@@ -2,6 +2,7 @@ var ComicStore = {
 	comcis: [],
 	callbacks: {
 		'addComic': [],
+		'deleteComic': [],
 		'loadComic': []
 	},
 
@@ -22,7 +23,6 @@ var ComicStore = {
 	},
 
 	addComic: function(comic) {
-		console.log("ComicStore", comic);
 		$.ajax({
 			url: '/py/record_comics',
 			type: 'POST',
@@ -35,6 +35,16 @@ var ComicStore = {
 		});
 	},
 
+	deleteComic: function(comic) {
+		$.ajax({
+			url: '/py/delete_comic/' + comic.key,
+			type: 'DELETE',
+			success: function (data) {
+				this.notifyConsumers('deleteComic', data);
+			}.bind(this)
+		});
+	},
+
 	loadComic: function() {
 		$.ajax({
 			url: '/py/retrieve_comics',
@@ -43,7 +53,6 @@ var ComicStore = {
 			success: function(data) {
 				var comics = data
 				this.comics = comics;
-				console.log(this.comics);
 				this.notifyConsumers('loadComic', data);
 			}.bind(this)
 		});

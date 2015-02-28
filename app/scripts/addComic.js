@@ -35,7 +35,6 @@ var AddComic = React.createClass({
 			title: this.state.title,
 			misc: this.state.misc
 		};
-		console.log("1",this.state.booknum);
 		ComicStore.addComic(newComic);
 	},
 

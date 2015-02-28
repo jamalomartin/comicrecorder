@@ -17,10 +17,25 @@ var ComicInventory = React.createClass({
 		var app = this;
 
 		ComicStore.setConsumer('loadComic', function(comicData) {
-			console.log("ComicInventory", comicData);
 			app.setState({comics: comicData});
 		});
 		return {comics: []};
+	},
+
+	handleDelete: function(deleteComic) {
+		var index = -1;
+		var comicLength = this.state.comics.length;
+
+		for (var i = 0; i < comicLength.length; i++) {
+			if (this.state.comics[i].key === comic.key) {
+				index = i;
+				break;
+			};
+		};
+		
+		this.state.comics.splice(index, 1);
+		this.setState({comics: this.state.comics});
+		ComicStore.deleteComic(deleteComic);
 	},
 
 	componentWillMount: function() {
@@ -32,13 +47,16 @@ var ComicInventory = React.createClass({
 		var comicNodes = this.state.comics.map(function(comic) {
 			var className = 'text-font';
 			return (
-				<tr>
+				<tr key={Math.random()}>
 					<td className="text-font">{comic.publisher}</td>
 					<td className="text-font">{comic.artist}</td>
 					<td className="text-font">{comic.writer}</td>
 					<td className="text-font">{comic.title}</td>
 					<td className="text-font">{comic.booknum}</td>
 					<td className="text-font">{comic.misc}</td>
+					<td>
+						<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
+					</td>
 				</tr>
 			)
 		}.bind(this));
@@ -53,6 +71,7 @@ var ComicInventory = React.createClass({
 						<th className="text-header">Title</th>
 						<th className="text-header">Book #</th>
 						<th className="text-header">Misc</th>
+						<th className="text-header">Delete</th>
 					</tr>
 					{comicNodes}
 				</tbody>
