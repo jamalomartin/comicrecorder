@@ -19,23 +19,27 @@ var ComicInventory = React.createClass({
 		ComicStore.setConsumer('loadComic', function(comicData) {
 			app.setState({comics: comicData});
 		});
+
+		ComicStore.setConsumer('deleteComic', function(comicDeleted) {
+			app.setState({comics: comicDeleted});
+		});
 		return {comics: []};
 	},
 
 	handleDelete: function(deleteComic) {
-		var index = -1;
-		var comicLength = this.state.comics.length;
 
-		for (var i = 0; i < comicLength.length; i++) {
-			if (this.state.comics[i].key === comic.key) {
-				index = i;
-				break;
-			};
-		};
-		
-		this.state.comics.splice(index, 1);
-		this.setState({comics: this.state.comics});
+		// var index = -1;
+		// for (var i = 0; i < this.state.comics.length; i++) {
+		// 	if (this.state.comics[i].key === deleteComic.key) {
+		// 		index = i;
+		// 	};
+		// }
+		// if (index > -1) {
+		// 	this.state.comics.splice(index, 1);
+		// }
+		console.log(this.state.comics);
 		ComicStore.deleteComic(deleteComic);
+		this.setState({comics: this.state.comics});
 	},
 
 	componentWillMount: function() {
@@ -43,17 +47,16 @@ var ComicInventory = React.createClass({
 	},
 
 	render: function() {
-		var app = this;
 		var comicNodes = this.state.comics.map(function(comic) {
-			var className = 'text-font';
 			return (
-				<tr key={Math.random()}>
+				<tr key={comic.key}>
 					<td className="text-font">{comic.publisher}</td>
 					<td className="text-font">{comic.artist}</td>
 					<td className="text-font">{comic.writer}</td>
 					<td className="text-font">{comic.title}</td>
 					<td className="text-font">{comic.booknum}</td>
 					<td className="text-font">{comic.misc}</td>
+					<td className="text-font">{comic.comicType}</td>
 					<td>
 						<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
 					</td>
@@ -71,6 +74,7 @@ var ComicInventory = React.createClass({
 						<th className="text-header">Title</th>
 						<th className="text-header">Book #</th>
 						<th className="text-header">Misc</th>
+						<th className="text-header">Comic Type</th>
 						<th className="text-header">Delete</th>
 					</tr>
 					{comicNodes}
