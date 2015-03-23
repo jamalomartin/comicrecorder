@@ -24,7 +24,8 @@ var AddComic = React.createClass({
 				booknum: '',
 				misc: '',
 				title: '',
-				comicType: ''
+				comicType: '',
+				date: ''
 			};
 	},
 
@@ -36,7 +37,8 @@ var AddComic = React.createClass({
 			booknum: this.state.booknum,
 			title: this.state.title,
 			misc: this.state.misc,
-			comicType: this.state.comicType
+			comicType: this.state.comicType,
+			date: this.state.date
 		};
 		ComicStore.addComic(newComic);
 	},
@@ -61,6 +63,9 @@ var AddComic = React.createClass({
 	},
 	onComicTypeChanged: function(e) {
 		this.setState({comicType: e.target.value});
+	},
+	onDateChange: function(e) {
+		this.setState({date: e.target.value});
 	},
 
 	render: function() {
@@ -113,7 +118,7 @@ var AddComic = React.createClass({
 								<th>
 									Date
 								</th>
-								<td><Input type="month" ref='Date' id='Date' /></td>
+								<td><Input type="month" ref='date' id='Date' onChange={this.onDateChange}/></td>
 								<th>
 									Misc
 								</th>

@@ -21,7 +21,8 @@ class PostComicList(webapp2.RequestHandler):
 			title=comic.get('title'),
 			booknum=comic.get('booknum'),
 			misc=comic.get('misc'),
-			comicType=comic.get('comicType')
+			comicType=comic.get('comicType'),
+			date=comic.get('date')
     	)
 		newComic.put()
 		self.response.out.write('success')

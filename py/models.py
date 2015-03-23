@@ -10,3 +10,4 @@ class Comic(ndb.Model):
     artist = ndb.StringProperty()
     misc = ndb.StringProperty()
     comicType = ndb.StringProperty()
+    date = ndb.StringProperty()

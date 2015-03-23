@@ -27,18 +27,16 @@ var ComicInventory = React.createClass({
 	},
 
 	handleDelete: function(deleteComic) {
-
-		// var index = -1;
-		// for (var i = 0; i < this.state.comics.length; i++) {
-		// 	if (this.state.comics[i].key === deleteComic.key) {
-		// 		index = i;
-		// 	};
-		// }
-		// if (index > -1) {
-		// 	this.state.comics.splice(index, 1);
-		// }
-		console.log(this.state.comics);
 		ComicStore.deleteComic(deleteComic);
+		var index = -1;
+		for (var i = 0; i < this.state.comics.length; i++) {
+			if (this.state.comics[i].key === deleteComic.key) {
+				index = i;
+			};
+		}
+		if (index > -1) {
+			this.state.comics.splice(index, 1);
+		}
 		this.setState({comics: this.state.comics});
 	},
 
@@ -49,7 +47,7 @@ var ComicInventory = React.createClass({
 	render: function() {
 		var comicNodes = this.state.comics.map(function(comic) {
 			return (
-				<tr key={comic.key}>
+				<tr key={comic.artist}>
 					<td className="text-font">{comic.publisher}</td>
 					<td className="text-font">{comic.artist}</td>
 					<td className="text-font">{comic.writer}</td>
@@ -57,6 +55,7 @@ var ComicInventory = React.createClass({
 					<td className="text-font">{comic.booknum}</td>
 					<td className="text-font">{comic.misc}</td>
 					<td className="text-font">{comic.comicType}</td>
+					<td className="text-font">{comic.date}</td>
 					<td>
 						<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
 					</td>
@@ -75,6 +74,7 @@ var ComicInventory = React.createClass({
 						<th className="text-header">Book #</th>
 						<th className="text-header">Misc</th>
 						<th className="text-header">Comic Type</th>
+						<th className="text-header">Date</th>
 						<th className="text-header">Delete</th>
 					</tr>
 					{comicNodes}

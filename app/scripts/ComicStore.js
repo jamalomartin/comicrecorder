@@ -40,7 +40,7 @@ var ComicStore = {
 			url: '/py/delete_comic/' + comic.key,
 			type: 'DELETE',
 			success: function (data) {
-				this.notifyConsumers('deleteComic', this.data);
+				this.notifyConsumers('deleteComic', this.comics);
 			}.bind(this)
 		});
 	},
