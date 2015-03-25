@@ -1,16 +1,14 @@
-/** @jsx React.DOM */
-
-'use strict';
+'use strict'
 
 var React = require('react');
 
-var Button = require('react-bootstrap/Button');
-var ButtonToolbar = require('react-bootstrap/ButtonToolbar');
-var Input = require('react-bootstrap/Input');
-var OverlayTrigger = require('react-bootstrap/OverlayTrigger');
-var Panel = require('react-bootstrap/Panel');
-var Table = require('react-bootstrap/Table');
-var Tooltip = require('react-bootstrap/Tooltip');
+var Button = require('react-bootstrap').Button;
+var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
+var Input = require('react-bootstrap').Input;
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
+var Panel = require('react-bootstrap').Panel;
+var Table = require('react-bootstrap').Table;
+var Tooltip = require('react-bootstrap').Tooltip;
 
 var ComicStore = require('./ComicStore');
 var ComicData = require('./ComicData');
@@ -114,7 +112,7 @@ var AddComic = React.createClass({
 								</th>
 								<td><select ref='comicType' id='comicType' onChange={this.onComicTypeChanged}>{comicTypeNodes}</select></td>
 							</tr>
-							<tr>	
+							<tr>
 								<th>
 									Date
 								</th>

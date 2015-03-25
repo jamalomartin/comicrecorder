@@ -1,14 +1,12 @@
-/** @jsx React.DOM */
-
-'use strict';
+'use strict'
 
 var React = require('react');
 
-var Button = require('react-bootstrap/Button');
-var ButtonToolbar = require('react-bootstrap/ButtonToolbar');
-var Input = require('react-bootstrap/Input');
-var Panel = require('react-bootstrap/Panel');
-var Table = require('react-bootstrap/Table');
+var Button = require('react-bootstrap').Button;
+var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
+var Input = require('react-bootstrap').Input;
+var Panel = require('react-bootstrap').Panel;
+var Table = require('react-bootstrap').Table;
 
 var ComicStore = require('./ComicStore');
 
@@ -47,19 +45,19 @@ var ComicInventory = React.createClass({
 	render: function() {
 		var comicNodes = this.state.comics.map(function(comic) {
 			return (
-				<tr key={comic.artist}>
-					<td className="text-font">{comic.publisher}</td>
-					<td className="text-font">{comic.artist}</td>
-					<td className="text-font">{comic.writer}</td>
-					<td className="text-font">{comic.title}</td>
-					<td className="text-font">{comic.booknum}</td>
-					<td className="text-font">{comic.misc}</td>
-					<td className="text-font">{comic.comicType}</td>
-					<td className="text-font">{comic.date}</td>
-					<td>
-						<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
-					</td>
-				</tr>
+					<tr key={comic}>
+							<td className="text-font">{comic.publisher}</td>
+							<td className="text-font">{comic.artist}</td>
+							<td className="text-font">{comic.writer}</td>
+							<td className="text-font">{comic.title}</td>
+							<td className="text-font">{comic.booknum}</td>
+							<td className="text-font">{comic.misc}</td>
+							<td className="text-font">{comic.comicType}</td>
+							<td className="text-font">{comic.date}</td>
+							<td>
+							<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
+							</td>
+					</tr>
 			)
 		}.bind(this));
 
