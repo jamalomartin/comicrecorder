@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var del = require('del');
+var useref = require('gulp-useref');
 
 var path = require('path');
 
@@ -78,10 +79,12 @@ gulp.task('clean', function (cb) {
 
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower', 'images'], function(){
+    var assets = useref.assets();
+
     return gulp.src('./app/*.html')
-               .pipe($.useref.assets())
-               .pipe($.useref.restore())
-               .pipe($.useref())
+               .pipe(assets)
+               .pipe(assets.restore())
+               .pipe(useref())
                .pipe(gulp.dest('dist'));
 });
 
@@ -122,10 +125,10 @@ gulp.task('watch', ['html', 'bundle', 'serve'], function () {
     // Watch .html files
     gulp.watch('app/*.html', ['html']);
 
-    
+
     // Watch .scss files
     gulp.watch('app/styles/**/*.scss', ['styles']);
-    
+
 
 
 
