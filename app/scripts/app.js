@@ -1,18 +1,17 @@
-/** @jsx React.DOM */
-
-'use strict';
+'use strict'
 
 var React = require('react');
 
-var AddComic = require('./AddComic.js');
-var ComicInventory = require('./ComicInventory.js');
-var Nav = require('react-bootstrap/Nav');
-var Navbar = require('react-bootstrap/Navbar');
-var NavItem = require('react-bootstrap/NavItem');
-var OverlayTrigger = require('react-bootstrap/OverlayTrigger');
-var Tooltip = require('react-bootstrap/Tooltip');
+var Nav = require('react-bootstrap').Nav;
+var Navbar = require('react-bootstrap').Navbar;
+var NavItem = require('react-bootstrap').NavItem;
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
+var Tooltip = require('react-bootstrap').Tooltip;
 
 var ComicStore = require('./ComicStore');
+var AddComic = require('./AddComic.js');
+var ComicInventory = require('./ComicInventory.js');
+
 
 var ComicRecorderApp = React.createClass({
 	getInitialState: function() {
@@ -26,7 +25,7 @@ var ComicRecorderApp = React.createClass({
 	componentWillMount: function() {
 
 	},
-	
+
 	selectRecordComicTab: function() {
 		this.setState({activeKey: 1});
 	},
@@ -66,4 +65,4 @@ var ComicRecorderApp = React.createClass({
 });
 
 var mountNode = document.getElementById('app');
-React.renderComponent(<ComicRecorderApp />, mountNode)
+React.render(<ComicRecorderApp />, mountNode)
