@@ -21,9 +21,16 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "react-bootstrap": "~0.18.0",
+    "react-bootstrap": "0.20.1",
     "modernizr": "^2.8.3",
     "bootstrap-sass-official": "^3.2.0",
-    "react": "^0.13.0"
+    "react": "0.13.1",
+    "d3": "3.5.5"
+  },
+  "resolutions": {
+    "react": "0.13.1"
+  },
+  "devDependencies": {
+    "d3": "3.5.5"
   }
 }

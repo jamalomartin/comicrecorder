@@ -13,7 +13,7 @@ var $ = require('gulp-load-plugins')();
 
 // Styles
 gulp.task('styles', function () {
-    return gulp.src('app/styles/*.*')
+    return gulp.src('app/styles/**.*')
         .pipe($.rubySass({
             style: 'expanded',
             precision: 10,

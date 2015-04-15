@@ -1,20 +1,21 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 
+@import "default.css";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 .header {
-    font-style: oblique;
-    background-color: #428bca;
-    border: solid 1px;
-	border-radius: 5px;
-	width: 180px;
+  font-style: oblique;
+  background-color: #428bca;
+  border: solid 1px;
+  border-radius: 5px;
+  width: 180px;
 }
 
 #bg {
 	z-index: -1;
-	position: fixed; 
-	top: 0; 
-	left: 0; 
+	position: fixed;
+	top: 0;
+	left: 0;
 
 	/* Preserve aspet ratio */
 	min-width: 100%;
@@ -22,8 +23,8 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 }
 
 .comic-table {
-    border: solid 1px;
-	border-radius: 5px;
+  border: solid 1px;
+  border-radius: 5px;
 }
 
 .container {
@@ -51,10 +52,11 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 
 .ctable {
 	margin: 0 0 0 0;
-	// border-bottom-left-radius:10px;
-	// border-top-left-radius:10px;
- //    border-bottom-right-radius:10px;
- //    border-top-right-radius:10px;
+  border: solid 2px black;
+}
+
+.trow {
+  border-bottom: solid 2px black;
 }
 
 .text-font {
@@ -67,8 +69,14 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
    background-color: white;
+   border-color: black;
 }
 
-// .table {
-// 	width: 0;
+// .comicNodes-enter {
+// 	opacity: 0.01;
+//   	transition: opacity .5s ease-in;
+// }
+
+// .comicNodes-enter.comicNodes-enter-active {
+//   opacity: 1;
 // }

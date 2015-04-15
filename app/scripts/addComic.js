@@ -13,9 +13,14 @@ var Tooltip = require('react-bootstrap').Tooltip;
 var ComicStore = require('./ComicStore');
 var ComicData = require('./ComicData');
 
-var AddComic = React.createClass({
 
+var AddComic = React.createClass({
 	getInitialState: function() {
+		var app = this;
+
+		ComicStore.setConsumer('loadComic', function(comicData) {
+			app.setState({comics: comicData});
+		});
 		return {artist: '',
 				writer: '',
 				publisher: '',
@@ -23,7 +28,8 @@ var AddComic = React.createClass({
 				misc: '',
 				title: '',
 				comicType: '',
-				date: ''
+				date: '',
+				autoCompleteArtist: []
 			};
 	},
 
@@ -66,11 +72,33 @@ var AddComic = React.createClass({
 		this.setState({date: e.target.value});
 	},
 
-	render: function() {
+	componentWillMount: function() {
+		ComicStore.loadComic();
+	},
+	componentDidMount: function() {
+		var self = this;
+		var artist = [];
+		var url = '/py/retrieve_comics';
+		$.getJSON(url, function(result) {
+			var comics = result;
+			comics.forEach(function(comic) {
+				artist.push(comic.artist);
+			});
+			if (this.isMounted()) {
+					this.setState({autoCompleteArtist: artist});
+			}
+		}.bind(this));
+	},
 
-		var comicTypeNodes = ComicData.getComicType().map(function (type) {
+	render: function() {
+		var options = [
+		    { value: 'one', label: 'One' },
+		    { value: 'two', label: 'Two' }
+		];
+
+		var comicTypeNodes = ComicData.getComicType().map(function (type, rank) {
 			return (
-				<option value={type}>{type}</option>
+				<option key={rank} value={type}>{type}</option>
 			);
 		}.bind(this));
 
@@ -121,6 +149,12 @@ var AddComic = React.createClass({
 									Misc
 								</th>
 								<td><Input type="text" ref='misc' id='misc' onChange={this.onMiscChanged}/></td>
+							</tr>
+							<tr>
+								<th>
+									testing
+								</th>
+								<td></td>
 							</tr>
 						</tbody>
 					</Table>

@@ -1,6 +1,6 @@
 'use strict'
 
-var React = require('react');
+var React = require('react/addons');
 
 var Button = require('react-bootstrap').Button;
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
@@ -9,6 +9,8 @@ var Panel = require('react-bootstrap').Panel;
 var Table = require('react-bootstrap').Table;
 
 var ComicStore = require('./ComicStore');
+
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var ComicInventory = React.createClass({
 	getInitialState: function() {
@@ -30,7 +32,7 @@ var ComicInventory = React.createClass({
 		for (var i = 0; i < this.state.comics.length; i++) {
 			if (this.state.comics[i].key === deleteComic.key) {
 				index = i;
-			};
+			}
 		}
 		if (index > -1) {
 			this.state.comics.splice(index, 1);
@@ -43,9 +45,9 @@ var ComicInventory = React.createClass({
 	},
 
 	render: function() {
-		var comicNodes = this.state.comics.map(function(comic) {
+		var comicNodes = this.state.comics.map(function(comic, rank) {
 			return (
-					<tr key={comic}>
+					<tr key={rank} className="trow">
 							<td className="text-font">{comic.publisher}</td>
 							<td className="text-font">{comic.artist}</td>
 							<td className="text-font">{comic.writer}</td>
@@ -55,29 +57,31 @@ var ComicInventory = React.createClass({
 							<td className="text-font">{comic.comicType}</td>
 							<td className="text-font">{comic.date}</td>
 							<td>
-							<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
+								<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
 							</td>
 					</tr>
 			)
 		}.bind(this));
 
 		return (
-			<Table className="ctable table-bordered table-striped">
-				<tbody>
-					<tr>
-						<th className="text-header">Publisher</th>
-						<th className="text-header">Artist</th>
-						<th className="text-header">Writer</th>
-						<th className="text-header">Title</th>
-						<th className="text-header">Book #</th>
-						<th className="text-header">Misc</th>
-						<th className="text-header">Comic Type</th>
-						<th className="text-header">Date</th>
-						<th className="text-header">Delete</th>
-					</tr>
-					{comicNodes}
-				</tbody>
-			</Table>
+			<div>
+				<Table className="ctable table-striped">
+					<tbody>
+						<tr className="trow">
+							<th className="text-header">Publisher</th>
+							<th className="text-header">Artist</th>
+							<th className="text-header">Writer</th>
+							<th className="text-header">Title</th>
+							<th className="text-header">Book #</th>
+							<th className="text-header">Misc</th>
+							<th className="text-header">Comic Type</th>
+							<th className="text-header">Date</th>
+							<th className="text-header">Delete</th>
+						</tr>
+						{comicNodes}
+					</tbody>
+				</Table>
+			</div>
 		)
 	}
 });
