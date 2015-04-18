@@ -7,10 +7,30 @@ var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Input = require('react-bootstrap').Input;
 var Panel = require('react-bootstrap').Panel;
 var Table = require('react-bootstrap').Table;
+var Modal = require('react-bootstrap').Modal;
+var ModalTrigger = require('react-bootstrap').ModalTrigger;
 
 var ComicStore = require('./ComicStore');
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+if(typeof key == typeof undefined){
+	alert("Please insert your marvel api key.");
+}
+
+var ComicModal = React.createClass({
+	render: function() {
+			return(
+				<Modal bsStyle="primary" title="Comic Details" animation={false}>
+					<div className="modal-body">
+					</div>
+					<div className="modal-footer">
+						<Button bsStyle="primary" onClick={this.props.onRequestHide}>Close</Button>
+					</div>
+				</Modal>
+			);
+	}
+});
 
 var ComicInventory = React.createClass({
 	getInitialState: function() {
@@ -51,7 +71,11 @@ var ComicInventory = React.createClass({
 							<td className="text-font">{comic.publisher}</td>
 							<td className="text-font">{comic.artist}</td>
 							<td className="text-font">{comic.writer}</td>
-							<td className="text-font">{comic.title}</td>
+							<td className="text-font">
+								<ModalTrigger modal={<ComicModal />}>
+									<Button bsStyle="primary">{comic.title}</Button>
+								</ModalTrigger>
+							</td>
 							<td className="text-font">{comic.booknum}</td>
 							<td className="text-font">{comic.misc}</td>
 							<td className="text-font">{comic.comicType}</td>

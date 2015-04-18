@@ -150,12 +150,6 @@ var AddComic = React.createClass({
 								</th>
 								<td><Input type="text" ref='misc' id='misc' onChange={this.onMiscChanged}/></td>
 							</tr>
-							<tr>
-								<th>
-									testing
-								</th>
-								<td></td>
-							</tr>
 						</tbody>
 					</Table>
 				</form>
