@@ -75,26 +75,8 @@ var AddComic = React.createClass({
 	componentWillMount: function() {
 		ComicStore.loadComic();
 	},
-	componentDidMount: function() {
-		var self = this;
-		var artist = [];
-		var url = '/py/retrieve_comics';
-		$.getJSON(url, function(result) {
-			var comics = result;
-			comics.forEach(function(comic) {
-				artist.push(comic.artist);
-			});
-			if (this.isMounted()) {
-					this.setState({autoCompleteArtist: artist});
-			}
-		}.bind(this));
-	},
 
 	render: function() {
-		var options = [
-		    { value: 'one', label: 'One' },
-		    { value: 'two', label: 'Two' }
-		];
 
 		var comicTypeNodes = ComicData.getComicType().map(function (type, rank) {
 			return (
