@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var React = require('react');
 
@@ -44,7 +44,11 @@ var AddComic = React.createClass({
 			comicType: this.state.comicType,
 			date: this.state.date
 		};
-		ComicStore.addComic(newComic);
+		if (newComic.booknum && newComic.title && newComic.publisher) {
+			ComicStore.addComic(newComic);
+		} else {
+			alert('Publisher, Book Number, and Title must be entered');
+		}
 	},
 
 	onArtistChanged: function(e) {
@@ -57,7 +61,7 @@ var AddComic = React.createClass({
 		this.setState({publisher: e.target.value});
 	},
 	onBooknumChanged: function(e) {
-		var x = this.setState({booknum: e.target.value});
+		this.setState({booknum: e.target.value});
 	},
 	onTitleChanged: function(e) {
 		this.setState({title: e.target.value});
@@ -88,7 +92,7 @@ var AddComic = React.createClass({
 			<Panel header='Add New Comic' className="panel-primary">
 				<ButtonToolbar>
 					<OverlayTrigger placement="left" overlay={<Tooltip>Save comic to inventory</Tooltip>}>
-						<Button bsStyle="primary" onClick={this.onSync}>Sync</Button>
+						<Button bsStyle="primary" onClick={this.onSync}>Save</Button>
 					</OverlayTrigger>
 				</ButtonToolbar>
 				<form>

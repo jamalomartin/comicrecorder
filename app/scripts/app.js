@@ -12,6 +12,7 @@ var ComicStore = require('./ComicStore');
 var AddComic = require('./AddComic');
 var ComicInventory = require('./ComicInventory');
 var ComicGraphs = require('./ComicGraphs');
+var ComicBadgeCount = require('./ComicBadgeCount');
 
 
 var ComicRecorderApp = React.createClass({
@@ -37,7 +38,7 @@ var ComicRecorderApp = React.createClass({
 		var cbContent = <AddComic/>;
 		if (this.state.activeKey === 2) {
 			cbContent = <ComicInventory/>;
-		} 
+		}
 		else if (this.state.activeKey === 3) {
 			cbContent = <ComicGraphs/>;
 		}
@@ -71,7 +72,9 @@ var ComicRecorderApp = React.createClass({
 								Comic Graph
 							</NavItem>
 						</OverlayTrigger>
-
+						<NavItem>
+							<ComicBadgeCount />
+						</NavItem>
 					</Nav>
 				</Navbar>
 				{cbContent}

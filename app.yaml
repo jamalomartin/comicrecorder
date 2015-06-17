@@ -20,16 +20,20 @@ handlers:
 
 - url: (.*)/
   static_files: dist\1/index.html
-  upload: app
+  upload: dist
   login: required
 
 - url: (.*)
   static_files: dist\1
-  upload: app
+  upload: dist
   login: required
 
 - url: /
   script: py.main.app
+
+skip_files:
+  - ^node_modules$
+  - ^app$
 
 libraries:
 - name: webapp2

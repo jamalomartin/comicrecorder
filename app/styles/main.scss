@@ -3,6 +3,16 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
 @import "default.css";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background:url(../images/pow.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 .header {
   font-style: oblique;
   background-color: #428bca;
@@ -72,11 +82,15 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/";
    border-color: black;
 }
 
-// .comicNodes-enter {
-// 	opacity: 0.01;
-//   	transition: opacity .5s ease-in;
-// }
+.chart-backgroung-color {
+  background-color: white;
+}
 
-// .comicNodes-enter.comicNodes-enter-active {
-//   opacity: 1;
-// }
+.comicNodes-enter {
+  opacity: 0.00;
+  transition: all .5s ease;
+}
+
+.comicNodes-enter.comicNodes-enter-active {
+  opacity: 1;
+}

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var React = require('react/addons');
 
@@ -14,21 +14,104 @@ var ComicStore = require('./ComicStore');
 
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-if(typeof key == typeof undefined){
-	alert("Please insert your marvel api key.");
+if(typeof key === typeof undefined){
+	alert('Please insert your marvel api key.');
 }
 
 var ComicModal = React.createClass({
+	getInitialState: function() {
+		return {
+						cName: [],
+						cCreators: [],
+						cDescription: '',
+						cImage: ''
+					 };
+	},
+	makeApiCall: function() {
+		var title = this.props.comicTitle;
+		var issue = this.props.comicIssueNumber;
+		var url = 'http://gateway.marvel.com:80/v1/public/comics?format=comic&formatType=comic&title='+ title +'&issueNumber='+ issue +'&limit=1&apikey='+key;
+		var self = this;
+
+		$.getJSON(url, function(data) {
+			var names = [];
+			var creators = [];
+			var creator = [];
+			var characters = [];
+			var id = [];
+			var role = [];
+			var description;
+			var image;
+			var comicData = data.data.results;
+
+			comicData.filter(function(obj) {
+				names = obj.characters.items;
+				creators = obj.creators.items;
+				description = obj.description;
+				image = obj.images[0].path;
+			});
+
+			creators.forEach(function(creatorObj) {
+				creator.push(creatorObj.name + ': ' + creatorObj.role);
+				// role.push(creatorObj.role);
+			});
+
+			names.forEach(function(nameObj, i) {
+				characters.push(nameObj.name);
+			});
+
+			self.setState({
+											cName: characters,
+											cDescription: description,
+											cImage: image,
+											cCreators: creator
+										});
+		}.bind(self));
+	},
+  componentDidMount: function() {
+    this.makeApiCall();
+  },
 	render: function() {
-			return(
-				<Modal bsStyle="primary" title="Comic Details" animation={false}>
-					<div className="modal-body">
-					</div>
-					<div className="modal-footer">
-						<Button bsStyle="primary" onClick={this.props.onRequestHide}>Close</Button>
-					</div>
-				</Modal>
-			);
+		var comicImage = this.state.cImage + '/portrait_medium.jpg';
+		var characterName = this.state.cName;
+		var comicCreators = this.state.cCreators;
+		var character;
+		var creators;
+
+		if (comicCreators === undefined) {
+			return;
+		} else {
+			creators = comicCreators;
+		}
+
+		if (characterName.length <= 0) {
+			character = 'Not Avalible';
+		} else {
+			character = characterName;
+		}
+
+		var creatorNodes = creators.map(function(creator, rank) {
+			return (
+				<tr key={rank}>
+					<td>{creator}</td>
+				</tr>
+			)
+		}.bind(this));
+
+		return(
+			<Modal bsStyle="primary" title="Comic Details" animation={true}>
+				<div className="modal-body">
+					<p><strong>Characters: </strong>{character}</p>
+					<p><strong>Description: </strong>{this.state.cDescription}</p>
+					<strong>Image:</strong>
+					<img src={comicImage}/>
+					<p><strong>Creators:</strong> {creatorNodes}</p>
+				</div>
+				<div className="modal-footer">
+					<Button bsStyle="primary" onClick={this.props.onRequestHide}>Close</Button>
+				</div>
+			</Modal>
+		);
 	}
 });
 
@@ -43,7 +126,13 @@ var ComicInventory = React.createClass({
 		ComicStore.setConsumer('deleteComic', function(comicDeleted) {
 			app.setState({comics: comicDeleted});
 		});
-		return {comics: []};
+		return {filterText: '',comics: []};
+	},
+	handleInfo: function() {
+	},
+
+	handleUserInput: function(filterText) {
+		this.setState({comic: filterText});
 	},
 
 	handleDelete: function(deleteComic) {
@@ -68,20 +157,21 @@ var ComicInventory = React.createClass({
 		var comicNodes = this.state.comics.map(function(comic, rank) {
 			return (
 					<tr key={rank} className="trow">
-							<td className="text-font">{comic.publisher}</td>
-							<td className="text-font">{comic.artist}</td>
-							<td className="text-font">{comic.writer}</td>
-							<td className="text-font">
-								<ModalTrigger modal={<ComicModal />}>
-									<Button bsStyle="primary">{comic.title}</Button>
-								</ModalTrigger>
-							</td>
+							<td className="text-font">{comic.publisher.toUpperCase()}</td>
+							<td className="text-font">{comic.artist.toUpperCase()}</td>
+							<td className="text-font">{comic.writer.toUpperCase()}</td>
+							<td className="text-font">{comic.title.toUpperCase()}</td>
 							<td className="text-font">{comic.booknum}</td>
 							<td className="text-font">{comic.misc}</td>
 							<td className="text-font">{comic.comicType}</td>
 							<td className="text-font">{comic.date}</td>
 							<td>
 								<Button bsStyle="primary" onClick={this.handleDelete.bind(this, comic)}>Delete</Button>
+							</td>
+							<td>
+								<ModalTrigger modal={<ComicModal comicTitle={comic.title} comicIssueNumber={comic.booknum}/>}>
+									<Button bsStyle="primary" onClick={this.handleInfo}>Info</Button>
+								</ModalTrigger>
 							</td>
 					</tr>
 			)
@@ -101,6 +191,7 @@ var ComicInventory = React.createClass({
 							<th className="text-header">Comic Type</th>
 							<th className="text-header">Date</th>
 							<th className="text-header">Delete</th>
+							<th className="text-header">Comic Info</th>
 						</tr>
 						{comicNodes}
 					</tbody>
