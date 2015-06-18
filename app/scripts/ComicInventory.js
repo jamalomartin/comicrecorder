@@ -103,9 +103,10 @@ var ComicModal = React.createClass({
 				<div className="modal-body">
 					<p><strong>Characters: </strong>{character}</p>
 					<p><strong>Description: </strong>{this.state.cDescription}</p>
-					<strong>Image:</strong>
-					<img src={comicImage}/>
-					<p><strong>Creators:</strong> {creatorNodes}</p>
+					<strong>Image: <img src={comicImage}/></strong>
+					<div className="creators">
+						<p><strong>Creators:</strong> {creatorNodes}</p>
+					</div>
 				</div>
 				<div className="modal-footer">
 					<Button bsStyle="primary" onClick={this.props.onRequestHide}>Close</Button>
