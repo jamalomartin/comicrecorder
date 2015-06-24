@@ -88,8 +88,13 @@ html, body {
    border-color: black;
 }
 
-.chart-backgroung-color {
+.chart-background-color {
   background-color: white;
+}
+
+.line-chart {
+  position: absolute;
+  margin-left: 100px;
 }
 
 .comicNodes-enter {
