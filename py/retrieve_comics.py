@@ -8,7 +8,7 @@ from google.appengine.api import namespace_manager
 class GetComicList(webapp2.RequestHandler):
 	def get(self):
 		namespace_manager.set_namespace(users.get_current_user().user_id())
-		comic_entities = models.Comic.query().order(models.Comic.publisher).fetch(1000)  # list of Comic models
+		comic_entities = models.Comic.query().order(models.Comic.publisher).order(models.Comic.booknum).fetch(1000)  # list of Comic models
 		comics = [  # list of comic dictionaries
 			{'publisher': c.publisher,
 			 'title': c.title,

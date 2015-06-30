@@ -81,6 +81,7 @@ html, body {
 
 .text-header {
 	background-color: #428bca !important;
+  text-align: center;
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
@@ -90,11 +91,17 @@ html, body {
 
 .chart-background-color {
   background-color: white;
+  width: 500px;
+  height: 400px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .line-chart {
-  position: absolute;
-  margin-left: 100px;
+  position: relative;
 }
 
 .comicNodes-enter {
@@ -104,4 +111,26 @@ html, body {
 
 .comicNodes-enter.comicNodes-enter-active {
   opacity: 1;
+}
+
+.chart-spacing {
+  margin-top: 100px;
+}
+
+.chart-title {
+  text-align: center;
+  background-color: white;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pie-chart {
+  position: relative;
+  bottom: 450px;
+}
+
+.bar-chart {
+  bottom: 460px;
+  width: 425px;
 }

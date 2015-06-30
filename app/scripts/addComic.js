@@ -34,15 +34,16 @@ var AddComic = React.createClass({
 	},
 
 	onSync: function() {
+		console.log(parseFloat(this.state.booknum));
 		var newComic = {
 			artist: this.state.artist,
 			writer: this.state.writer,
 			publisher: this.state.publisher,
-			booknum: this.state.booknum,
+			booknum: parseFloat(this.state.booknum),
 			title: this.state.title,
 			misc: this.state.misc,
 			comicType: this.state.comicType,
-			date: this.state.date
+			date: this.state.date,
 		};
 		if (newComic.booknum && newComic.title && newComic.publisher) {
 			ComicStore.addComic(newComic);

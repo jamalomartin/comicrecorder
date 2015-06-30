@@ -11,7 +11,7 @@ class PostComicList(webapp2.RequestHandler):
 		namespace_manager.set_namespace(users.get_current_user().user_id())
 		logging.warn(users.get_current_user().user_id())
 		comic = json.loads(self.request.body)
-		
+
 
 		print comic;
 		newComic = Comic(

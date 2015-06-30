@@ -123,21 +123,30 @@ var ComicGraphs = React.createClass({
     }.bind(this));
     return (
       <div>
-            <BarChart data={barData}
-                      width={400}
-                      height={400}
-                      className="chart-background-color"
-            />
+        <div>
+          <h3 className="chart-title">Number of comics by publisher</h3>
+          <BarChart data={barData}
+                    width={400}
+                    height={400}
+                    className="chart-background-color"
+          />
+      </div>
+      <div className="chart-spacing">
+        <h3 className="chart-title">Number of comics by year</h3>
           <LineChart data={lineData}
                       width={400}
                       height={400}
                       className="chart-background-color line-chart"
           />
-        <PieChart data={data}
-                      width={400}
-                      height={400}
-                      className="chart-background-color"
-          />
+      </div>
+        <div className="chart-spacing">
+          <h3 className="chart-title">Number of comics by title</h3>
+          <PieChart data={data}
+                    width={400}
+                    height={400}
+                    className="chart-background-color"
+            />
+        </div>f
       </div>
     );
   }

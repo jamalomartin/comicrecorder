@@ -155,6 +155,12 @@ var ComicInventory = React.createClass({
 	},
 
 	render: function() {
+		var comics = this.state.comics;
+		function sortComics(a,b) {
+			return(a.booknum - b.booknum);
+		}
+		comics.sort(sortComics);
+		console.log(comics);
 		var comicNodes = this.state.comics.map(function(comic, rank) {
 			return (
 					<tr key={rank} className="trow">
@@ -187,7 +193,7 @@ var ComicInventory = React.createClass({
 							<th className="text-header">Artist</th>
 							<th className="text-header">Writer</th>
 							<th className="text-header">Title</th>
-							<th className="text-header">Book #</th>
+							<th className="text-header">Issue#</th>
 							<th className="text-header">Misc</th>
 							<th className="text-header">Comic Type</th>
 							<th className="text-header">Date</th>
